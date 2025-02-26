@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://b4puny5e8mlwm"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Connect" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -150.0
+offset_right = 100.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameName" type="Label" parent="Connect"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 16.0
+offset_right = 181.0
+offset_bottom = 39.0
+text = "Box Multiplayer Test
+"
+
+[node name="IPLabel" type="Label" parent="Connect"]
+layout_mode = 2
+offset_left = 1.0
+offset_top = 47.0
+offset_right = 201.0
+offset_bottom = 70.0
+text = "IP:"
+
+[node name="NameLabel" type="Label" parent="Connect"]
+layout_mode = 2
+offset_top = 100.0
+offset_right = 200.0
+offset_bottom = 123.0
+text = "Name:"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Connect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 63.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="IPAddress" type="LineEdit" parent="Connect/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Enter IP"
+alignment = 1
+max_length = 15
+
+[node name="Username" type="LineEdit" parent="Connect/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Enter Username"
+alignment = 1
+max_length = 30
+
+[node name="Button" type="Button" parent="Connect/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Host!"
+
+[node name="Button2" type="Button" parent="Connect/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Join!"
