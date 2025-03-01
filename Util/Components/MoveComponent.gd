@@ -14,4 +14,5 @@ func _ready():
 func update():
 	var movement = Input.get_vector("move_left","move_right","move_up","move_down").normalized()
 	player_character.velocity = movement * speed
+	print(player_character.velocity)
 	player_character.move_and_slide()

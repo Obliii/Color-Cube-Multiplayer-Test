@@ -16,12 +16,11 @@ func _on_host_button_pressed() -> void:
 	if username.text == "":
 		show_error_window("Please enter a Username!")
 		return
-		# lobby code
+	Network.create_game(username.text)
 
 func _on_join_button_pressed() -> void:
 	if credientials_entered():
-		pass
-		# lobby code
+		Network.join_game(ip_address.text)
 
 func show_error_window(message):
 	error_window.set_text(message)

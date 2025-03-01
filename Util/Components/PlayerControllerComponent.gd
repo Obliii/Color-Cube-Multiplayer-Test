@@ -5,6 +5,8 @@ extends Node
 @export var player_character: CharacterBody2D
 @export var move_component: MoveComponent
 
+var player_id: int
+
 func _physics_process(delta):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		if move_component:
