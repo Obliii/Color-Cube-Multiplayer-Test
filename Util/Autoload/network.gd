@@ -10,6 +10,7 @@ const MAX_CONNECTIONS = 20
 
 # Player info for every player.
 var players = {}
+var player_objects = []
 
 # The idea is to get the name of the player, and the color that they have selected.
 var player_info = {"name": "Name", "color": "selected_color"}
@@ -43,11 +44,18 @@ func create_game():
 func remove_multiplayer_peer():
 	multiplayer.multiplayer_peer = null
 
+@rpc("any_peer", "reliable")
+func _register_player(new_player_info):
+	var new_player_id = multiplayer.get_remote_sender_id()
+	players[new_player_id] = new_player_info
+	player_connected.emit(new_player_id, new_player_info)
+
 func _on_player_connected():
 	pass
-
-func _on_player_disconnected():
-	pass	
+	
+func _on_player_disconnected(id):
+	players.erase(id)
+	player_disconnected.emit(id)
 
 func _on_connected_ok():
 	pass
