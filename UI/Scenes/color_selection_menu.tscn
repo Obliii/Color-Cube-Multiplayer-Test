@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb07b55ftw5uq"]
+
+[ext_resource type="Script" path="res://UI/Scenes/color_selection_menu.gd" id="1_pgw15"]
+[ext_resource type="PackedScene" uid="uid://ihfuaexulk3w" path="res://UI/Scenes/color_preset.tscn" id="2_a3l3b"]
+
+[node name="ColorSelectionMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pgw15")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Choos Colr"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+
+[node name="Blue" parent="PanelContainer/VBoxContainer/HFlowContainer" instance=ExtResource("2_a3l3b")]
+layout_mode = 2
+
+[node name="Green" parent="PanelContainer/VBoxContainer/HFlowContainer" instance=ExtResource("2_a3l3b")]
+layout_mode = 2
+color = Color(0, 1, 0, 1)
+
+[node name="Red" parent="PanelContainer/VBoxContainer/HFlowContainer" instance=ExtResource("2_a3l3b")]
+layout_mode = 2
+color = Color(1, 0, 0, 1)

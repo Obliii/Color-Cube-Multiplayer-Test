@@ -1,12 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd4r7s5jydpqv"]
+[gd_scene load_steps=3 format=3 uid="uid://bd4r7s5jydpqv"]
 
 [ext_resource type="PackedScene" uid="uid://b4puny5e8mlwm" path="res://Scenes/lobby.tscn" id="1_w1qa7"]
+[ext_resource type="PackedScene" uid="uid://bb07b55ftw5uq" path="res://UI/Scenes/color_selection_menu.tscn" id="2_yto4h"]
 
 [node name="Game" type="Node2D"]
 
-[node name="Lobby" parent="." instance=ExtResource("1_w1qa7")]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Lobby" parent="CanvasLayer" instance=ExtResource("1_w1qa7")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+
+[node name="ColorSelection" parent="CanvasLayer" instance=ExtResource("2_yto4h")]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 12
+anchor_top = 1.0
+grow_vertical = 0
