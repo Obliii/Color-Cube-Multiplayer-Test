@@ -6,12 +6,14 @@ extends Node
 @export var synced_position := Vector2()
 @export var speed := 100.0
 
-func _ready():
+func _enter_tree():
 	player_character.position = synced_position
-	if str(name).is_valid_int():
-		get_node("PlayerControllerComponent/InputsSync").set_multiplayer_authority(str(name).to_int())
 
 func update():
-	var movement = Input.get_vector("move_left","move_right","move_up","move_down").normalized()
-	player_character.velocity = movement * speed
-	player_character.move_and_slide()
+	if is_multiplayer_authority():
+		var movement = Input.get_vector("move_left","move_right","move_up","move_down").normalized()
+		player_character.velocity = movement * speed
+		player_character.move_and_slide()
+		synced_position = player_character.position
+	else:
+		player_character.position = synced_position

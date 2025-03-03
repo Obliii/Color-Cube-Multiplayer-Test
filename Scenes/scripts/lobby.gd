@@ -1,3 +1,4 @@
+class_name Lobby
 extends Control
 
 const DEFAULT_USER = "Default User"
