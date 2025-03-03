@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfutefrgtynv2"]
+[gd_scene load_steps=5 format=3 uid="uid://bfutefrgtynv2"]
 
-[ext_resource type="Script" path="res://Util/Components/PlayerControllerComponent.gd" id="1_3da4r"]
-[ext_resource type="Script" path="res://Util/Components/MoveComponent.gd" id="1_11ubn"]
+[ext_resource type="Script" path="res://Util/Components/MoveComponent.gd" id="1_wjt8e"]
+[ext_resource type="Script" path="res://Util/Components/PlayerControllerComponent.gd" id="2_72v42"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4kxp4"]
 size = Vector2(40, 40)
@@ -10,16 +10,13 @@ size = Vector2(40, 40)
 properties/0/path = NodePath("ColorRect:self_modulate")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("MoveComponent:synced_position")
+properties/1/path = NodePath(".:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k21te"]
-properties/0/path = NodePath("PlayerControllerComponent:movement")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-
 [node name="PlayerCube" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -30,19 +27,18 @@ offset_bottom = 40.0
 position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_4kxp4")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_15qsr")
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("player_character")]
-script = ExtResource("1_11ubn")
+script = ExtResource("1_wjt8e")
 player_character = NodePath("..")
 
-[node name="PlayerControllerComponent" type="Node" parent="." node_paths=PackedStringArray("player_character", "move_component")]
-script = ExtResource("1_3da4r")
+[node name="PlayerControllerComponent" type="Node" parent="." node_paths=PackedStringArray("player_character", "camera", "move_component")]
+script = ExtResource("2_72v42")
 player_character = NodePath("..")
+camera = NodePath("../Camera2D")
 move_component = NodePath("../MoveComponent")
-
-[node name="InputsSync" type="MultiplayerSynchronizer" parent="PlayerControllerComponent"]
-replication_config = SubResource("SceneReplicationConfig_k21te")
-
-[node name="Camera2D" type="Camera2D" parent="."]

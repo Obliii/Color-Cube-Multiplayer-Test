@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd4r7s5jydpqv"]
+[gd_scene load_steps=5 format=3 uid="uid://bd4r7s5jydpqv"]
 
+[ext_resource type="Script" path="res://Scenes/scripts/game.gd" id="1_cvono"]
 [ext_resource type="PackedScene" uid="uid://b4puny5e8mlwm" path="res://Scenes/lobby.tscn" id="1_w1qa7"]
 [ext_resource type="PackedScene" uid="uid://bb07b55ftw5uq" path="res://UI/Scenes/color_selection_menu.tscn" id="2_yto4h"]
 [ext_resource type="PackedScene" uid="uid://bjb8lixupxfr5" path="res://UI/Scenes/network_status.tscn" id="3_ua1bq"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_cvono")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)
+[node name="Players" type="Node2D" parent="."]
+
+[node name="PlayerMultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Objects/playercube.tscn")
+spawn_path = NodePath("../Players")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true

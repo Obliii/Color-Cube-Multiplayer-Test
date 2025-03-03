@@ -3,6 +3,7 @@ extends Node2D
 
 @onready var color_selection = $CanvasLayer/ColorSelection
 @onready var lobby = $CanvasLayer/Lobby
+@onready var multiplayer_spawner: MultiplayerSpawner = $PlayerMultiplayerSpawner
 var level: Node2D
 
 func _ready() -> void:

@@ -3,18 +3,16 @@ extends Node
 
 # Dependencies
 @export var player_character: CharacterBody2D
+@export var camera: Camera2D
 @export var move_component: MoveComponent
 
-var player_id: int
+func _enter_tree():
+	set_multiplayer_authority(player_character.name.to_int())
+	if is_multiplayer_authority():
+		#camera.enabled = true
+		pass
 
-func _physics_process(delta):
-	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
+func _physics_process(_delta):
+	if is_multiplayer_authority():
 		if move_component:
 			move_component.update()
-	
-	if multiplayer.multiplayer_peer == null or is_multiplayer_authority():
-		if move_component and player_character:
-			move_component.synced_position = player_character.position
-	else:
-		if move_component and player_character:
-			player_character.position = move_component.synced_position

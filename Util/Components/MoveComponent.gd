@@ -4,7 +4,7 @@ extends Node
 # Dependencies
 @export var player_character: CharacterBody2D
 @export var synced_position := Vector2()
-@export var speed := 25.0
+@export var speed := 100.0
 
 func _ready():
 	player_character.position = synced_position
@@ -14,5 +14,4 @@ func _ready():
 func update():
 	var movement = Input.get_vector("move_left","move_right","move_up","move_down").normalized()
 	player_character.velocity = movement * speed
-	print(player_character.velocity)
 	player_character.move_and_slide()

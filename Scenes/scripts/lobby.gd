@@ -13,10 +13,8 @@ func _ready() -> void:
 		username.text = DEFAULT_USER
 	
 func _on_host_button_pressed() -> void:
-	if username.text == "":
-		show_error_window("Please enter a Username!")
-		return
-	Network.create_game(username.text)
+	if credientials_entered():
+		Network.create_game(username.text)
 
 func _on_join_button_pressed() -> void:
 	if credientials_entered():
@@ -30,10 +28,6 @@ func show_error_window(message):
 func credientials_entered():
 	if username.text == "":
 		show_error_window("Please enter a Username!")
-		return false
-	
-	if ip_address.text == "":
-		show_error_window("Please enter an IP Address!")
 		return false
 	
 	return true
