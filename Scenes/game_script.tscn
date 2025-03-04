@@ -15,7 +15,7 @@ _spawnable_scenes = PackedStringArray("res://Objects/playercube.tscn")
 spawn_path = NodePath("../Players")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
+layer = 0
 
 [node name="Lobby" parent="CanvasLayer" instance=ExtResource("1_w1qa7")]
 anchors_preset = 8

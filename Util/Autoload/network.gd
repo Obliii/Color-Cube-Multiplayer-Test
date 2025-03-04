@@ -14,7 +14,7 @@ var players = {}
 var game_instance: Game
 
 # The idea is to get the name of the player, and the color that they have selected.
-var player_info = {"name": "Name", "id": 0}
+var player_info = {"name": "Name", "id": 0, "color": Color(1,1,1)}
 
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
@@ -33,6 +33,8 @@ func join_game(address = ""):
 		return error
 	multiplayer.multiplayer_peer = peer
 
+# Host the game and make sure that new peers are spawned in.
+# Spawn the host as a player.
 func create_game(player_name):
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
@@ -82,6 +84,7 @@ func _register_player(new_player_info):
 	players[new_player_id] = new_player_info
 	player_connected.emit(new_player_id, new_player_info)
 
+# Despawn the player for everyone and remove them from the player list.
 func _on_player_disconnected(id):
 	rpc("despawn_player", id)
 	players.erase(id)
@@ -107,17 +110,21 @@ func _on_server_disconnected():
 	players.clear()
 	server_disconnected.emit()
 
+# Reveal the lobby screen.
 func reveal_lobby(value):
-	var lobby = game_instance.lobby
+	var lobby = game_instance.lobby_ui
 	if lobby and value:
-		lobby.show()
+		lobby.visible = true
 	else:
-		lobby.hide()
+		lobby.visible = false
 
+# Reset the game for the client once they disconnect.
 func reset_game():
 	for entity in game_instance.get_node("Players").get_children():
 		entity.queue_free()
-	game_instance.queue_free()
+	game_instance.level.queue_free()
+	remove_multiplayer_peer()
+	reveal_lobby(true)
 
 func _on_color_selected(new_color):
 	player_info["color"] = new_color
